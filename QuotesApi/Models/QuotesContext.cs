@@ -12,7 +12,7 @@ namespace QuotesApi.Models
         public QuotesContext()
         {
             var path = Environment.CurrentDirectory;
-            DbPath = System.IO.Path.Join(path, "\\Data\\quotes.db");
+            DbPath = System.IO.Path.Join(path, "\\quotes.db");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
