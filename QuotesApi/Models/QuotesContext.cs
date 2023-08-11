@@ -5,18 +5,13 @@ namespace QuotesApi.Models
 {
     public class QuotesContext : DbContext
     {
-        public DbSet<Quote> Quote { get; set; }
+        private readonly string connectionString =
+            System.Environment.GetEnvironmentVariable($"mysqlConnectionString");
 
-        public string DbPath { get; }
-
-        public QuotesContext()
-        {
-            var path = Environment.CurrentDirectory;
-            DbPath = System.IO.Path.Join(path, "\\quotes.db");
-        }
+        public DbSet<Quote> Quotes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite($"Data Source={DbPath}");
+            => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
     }
 }
